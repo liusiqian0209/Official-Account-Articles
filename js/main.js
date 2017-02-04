@@ -49,16 +49,23 @@ function addNewArticle(container, id, title, src, date) {
     if(list!=null && list.nodeName.toLowerCase() === 'ul'){
         var article = document.createElement('li');
         article.setAttribute('id',id);
-        article.innerHTML = title;
-        article.onclick = function () {
-            if(frame){
-                frame.src = src;
-            }
-        };
+        var link = document.createElement('a');
+        link.innerHTML = title;
+        link.setAttribute('href','javascript:setUrl("'+src+'")');
+        article.appendChild(link);
         var txtdate = document.createElement('span');
         txtdate.innerHTML = date;
         article.appendChild(txtdate);
         list.appendChild(article);
+    }
+}
+
+/**
+ * 给iframe设置src_url
+ */
+function setUrl(src) {
+    if(frame){
+        frame.src = src;
     }
 }
 
